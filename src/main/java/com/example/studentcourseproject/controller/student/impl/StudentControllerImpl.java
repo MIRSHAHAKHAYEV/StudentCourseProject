@@ -22,6 +22,10 @@ public class StudentControllerImpl implements IStudentController {
     }
     @GetMapping(path = "/country")
     public boolean isAllowedCountry(@RequestHeader String country){
-        return propertyRecord.allowedCountries().contains(country);
+        return propertyRecord.allowedCountries().contains(country.toUpperCase());
+    }
+    @GetMapping("/record")
+    public PropertyRecord returnRecord(){
+        return propertyRecord;
     }
 }
