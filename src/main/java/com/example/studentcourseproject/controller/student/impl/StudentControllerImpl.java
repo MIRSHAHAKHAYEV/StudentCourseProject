@@ -1,5 +1,6 @@
 package com.example.studentcourseproject.controller.student.impl;
 
+import com.example.studentcourseproject.configRecord.PropertyRecord;
 import com.example.studentcourseproject.controller.student.IStudentController;
 import com.example.studentcourseproject.service.student.IStudentService;
 import lombok.RequiredArgsConstructor;
@@ -14,16 +15,13 @@ import java.util.List;
 @RequiredArgsConstructor
 public class StudentControllerImpl implements IStudentController {
     private final IStudentService studentService;
-    @Value("${app.maximum-student}")
-    private int maximumStudent;
-    @Value("${app.allowed-countries}")
-    private List<String> allowedCountries;
+    private final PropertyRecord propertyRecord;
     @GetMapping
     public int getValues(){
-        return maximumStudent;
+        return propertyRecord.maximumStudent();
     }
     @GetMapping(path = "/country")
     public boolean isAllowedCountry(@RequestHeader String country){
-        return allowedCountries.contains(country);
+        return propertyRecord.allowedCountries().contains(country);
     }
 }
